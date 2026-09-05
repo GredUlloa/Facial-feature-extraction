@@ -7,7 +7,7 @@ from insightface.app import FaceAnalysis
 from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 
-## Implementando Resnet100 como modelo de extracción de características
+## Implementando LResNet100E-IR (ResNet100)
 app = FaceAnalysis(providers=['CPUExecutionProvider'])
 app.prepare(ctx_id=0, det_size=(640, 640))
 

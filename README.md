@@ -28,7 +28,7 @@ onnxruntime
 
 1. Descarga o clona el proyecto en una terminal:
 
-```sh
+```bash
 git clone https://github.com/GredUlloa/FineTuning-ArcFace-con-SVM
 cd # copia la ruta del proyecto
 ``` 
@@ -50,7 +50,7 @@ source venv/bin/activate
 
 4. Instala las dependencias del proyecto:
 
-```sh
+```bash
 pip install -r requirements.txt
 ```
 
@@ -58,25 +58,26 @@ pip install -r requirements.txt
 
 ### 1. Creacion de los datasets
 
-En la ruta `\FaceRec\dataset` se encuentra por defecto los siguientes archivos que corresponden a fotos de una misma persona:
+En la ruta `./Datasets` se encuentra por defecto los siguientes archivos que corresponden a fotos de una misma persona:
 
-* `\Andres_C` (carpeta con 7 fotos)
-* `Fototest2.jpg` (foto de prueba)
+* `/AndresC` (carpeta con 7 fotos)
+* `FT2.jpg` (respectiva foto de prueba)
 
-Para que el modelo SVM pueda realizar una predicción se necesitan al menos 2 datasets diferentes. Se debe crear otro dataset con el nombre de la otra persona y además una foto nueva que sirva como test de predicción:
+Para que el modelo SVM realice una verificación es necesario disponer de al menos 2 datasets diferentes con el nombre de la otra persona y además una foto nueva que sirva como test de predicción:
 
-* `\persona2` (carpeta con 7 o más fotos)
-* `FotoTest1.jpg` (foto de prueba)
+* `/persona2` (carpeta con 7 o más fotos)
+* `FT1.jpg` (foto de prueba)
 
+Ya que el modelo SVM está diseñado para clases binarias, se adapta al problema mediante 
 ### 2. Ejecutar
 
-En la terminal se ejecuta el código `Finetuning.py`:
+En la terminal se ejecuta el código `Verificar.py`:
 
-```sh
+```bash
 python Finetuning.py
 ```
 
-Finalmente en el entorno de trabajo se guardaran los siguientes archivos:
+Finalmente se devuelven y guardan los siguientes archivos en el directorio de trabajo:
 
-* `svm_insightface.pkl`: El modelo SVM entrenado con el dataset
-* `label_encoder.pkl`: Las etiquetas codificadas para la predicción
+* `svm_insightface.pkl`: Pesos del modelo SVM una vez entrenado
+* `label_encoder.pkl`: Etiquetas para el rostro de cada persona en los datasets
