@@ -63,5 +63,5 @@ def predict_image(img_path):
 
     return le.inverse_transform([pred])[0], prob
 
-nombre, confianza = predict_image("Dataset/FT2.jpg")
+nombre, confianza = predict_image("Datasets/AndresC.jpg")
 print(f"Predicción: {nombre} (confianza: {confianza:.2f})")
