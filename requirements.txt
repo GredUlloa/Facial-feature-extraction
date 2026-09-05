@@ -1,6 +1,0 @@
-numpy
-deepface
-opencv-python
-insightface
-scikit-learn
-onnxruntime

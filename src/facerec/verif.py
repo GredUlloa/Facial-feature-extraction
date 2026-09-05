@@ -27,9 +27,9 @@ for person in os.listdir(DATA_PATH):
         faces = app.get(img)
 
         if len(faces) > 0:
-            embedding = faces[0].embedding # Embedding del primer rostro detectado
-            X.append(embedding) # Agregar embedding a la lista de características
-            y.append(person)    # Agregar etiqueta correspondiente
+            embedding = faces[0].embedding # Características del primer rostro detectado
+            X.append(embedding) # Añadiendo embedding
+            y.append(person)    # Añadiendo etiqueta correspondiente
 
 X = np.array(X)
 y = np.array(y)
@@ -63,5 +63,5 @@ def predict_image(img_path):
 
     return le.inverse_transform([pred])[0], prob
 
-# nombre, confianza = predict_image("dataset\FotoTest1.jpg")
-# print(f"Predicción: {nombre} (confianza: {confianza:.2f})")
+nombre, confianza = predict_image("Dataset/FT2.jpg")
+print(f"Predicción: {nombre} (confianza: {confianza:.2f})")

@@ -58,23 +58,23 @@ pip install -r requirements.txt
 
 ### 1. Creacion de los datasets
 
-En la ruta `./Datasets` se encuentra por defecto los siguientes archivos que corresponden a fotos de una misma persona:
+Considerando `src/` la ruta relativa del proyecto, dentro de `./Datasets` se encuentra por defecto los siguientes archivos que corresponden a fotos de una misma persona:
 
-* `/AndresC` (carpeta con 7 fotos)
-* `FT2.jpg` (respectiva foto de prueba)
+* `/AndresC` (7 fotos)
+* `AndresC.jpg` (respectiva foto de prueba)
 
 Para que el modelo SVM realice una verificación es necesario disponer de al menos 2 datasets diferentes con el nombre de la otra persona y además una foto nueva que sirva como test de predicción:
 
-* `/persona2` (carpeta con 7 o más fotos)
-* `FT1.jpg` (foto de prueba)
+* `/persona2`
+* `FT2.jpg`
 
 Ya que el modelo SVM está diseñado para clases binarias, se adapta al problema mediante 
 ### 2. Ejecutar
 
-En la terminal se ejecuta el código `Verificar.py`:
+En la terminal se ejecuta el código `verif.py`:
 
 ```bash
-python Finetuning.py
+uv run verif.py
 ```
 
 Finalmente se devuelven y guardan los siguientes archivos en el directorio de trabajo:
