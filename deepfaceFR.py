@@ -4,12 +4,14 @@
 # Finalmente, mostramos los resultados de la verificación.
 ##%
 
-from deepface import DeepFace
-import cv2
-import matplotlib.pyplot as plt
-import matplotlib.cbook as cbook
 import os
+
+import cv2
+
+# import matplotlib.cbook as cbook
+import matplotlib.pyplot as plt
 import numpy as np
+from deepface import DeepFace
 
 # Importando pares de fotos desde sus respectivas rutas en 'dataset'
 img1 = plt.imread('FotoTest1.jpg')

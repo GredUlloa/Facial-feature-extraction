@@ -1,16 +1,16 @@
-# Reconocimiento facial: Feature-extraction con ArcFace y Fine-tuning con SVM
+# Extracción de Características con un Modelo ArcFace y Clasificación SVM para Verificación Facial.
 
-*Feature extraction* consiste en transformar datos brutos en representaciones más compactas y relevantes que pueden ser utilizadas por algoritmos de inteligencia artificial para aprender, clasificar o reconocer patrones. 
+**Extracción de Características** consiste en transformar datos brutos en representaciones más compactas y relevantes que pueden ser utilizadas por algoritmos de inteligencia artificial para aprender, clasificar o reconocer patrones. 
 
-En este proyecto se usa *ArcFace* para obtener los embeddings de un conjunto de imágenes; y se entrena un modelo clasificador (Suport Vector Machine - SVM) sobre estos embeddings para que realice predicciones sobre nuevas imágenes.
+En este proyecto se utiliza la función de pérdida **ArcFace** mediante el modelo preeentrenado *LResNet100E-IR* para obtener embeddings de un dataset de rostros faciales personalizado, y usando estos embeddings se entrena un modelo clasificador se realizan **verificaciones 1:1** con nuevas imágenes.
 
-Tecnologías usadas en este proyecto:
+Tecnologías usadas:
 
-* Insightface: Framework que usa *ArcFace* como función de pérdida para generar embeddings altamente discriminantes.
-* opencv-python: Para cargar las imágenes del entorno de trabajo.
-* numpy: Para operar las matrices de embeddings y etiquetas. 
-* Scikit-learn: Para la importación de *Suport Vector Machine* (SVM) y codificación de etiquetas.
-* onnxruntime: Motor de inferencia rápido para ejecutar modelos de deep learning en GPU o CPU.
+* **Insightface**: Es un proyecto de código abierto que representa el estado del arte para el análisis facial 2D y 3D, implementa la función de pérdida *ArcFace*, y permite extraer embeddings altamente discriminantes en cada imagen.
+* **onnxruntime**: Motor de inferencia rápido y eficiente, usado por Insightface para ejecutar modelos de deep learning usando únicamente la CPU. La aceleración por GPU necesita la instalación adicional del paquete `onnxruntime-gpu`.
+* **Opencv**: Usado para la inicialización y preprocesamiento de las imágenes del dataset.
+* **Numpy**: Permite realizar operaciones matemáticas sobre arreglos vectoriales o matriciales, en este proyecto se aplica con las matrices de embeddings y etiquetados(*labels*) para realizar el entrenamiento del modelo SVM. 
+* **Scikit-learn**: Proporciona el modelo de machine-learning clásico **Suport Vector Machine** (*SVM*) y codificación de etiquetas.
 
 
 ## Instalación
@@ -35,16 +35,17 @@ cd # copia la ruta del proyecto
 
 2. Crea un entorno con la version 3.8 de python:
 
-```cmd
+```bash
 py -3.8 -m venv venv
 ```
 
 3. Activa el entorno creado:
 
-```cmd
-.\venv\Scripts\activate
-# En macOS/Linux
-# source venv/bin/activate
+```bash
+# En Linux/Mac
+source venv/bin/activate
+# En windows
+# .\venv\Scripts\activate
 ```
 
 4. Instala las dependencias del proyecto:
