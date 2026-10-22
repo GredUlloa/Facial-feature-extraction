@@ -2,7 +2,7 @@
 
 **Extracción de Características** consiste en transformar datos brutos en representaciones más compactas y relevantes que pueden ser utilizadas por algoritmos de inteligencia artificial para aprender, clasificar o reconocer patrones. 
 
-En este proyecto se utiliza la función de pérdida **ArcFace** mediante el modelo preeentrenado *LResNet100E-IR* para obtener embeddings de un dataset de rostros faciales personalizado, y usando estos embeddings se entrena un modelo clasificador se realizan **verificaciones 1:1** con nuevas imágenes.
+En este proyecto se utiliza la función de pérdida **ArcFace** mediante el modelo preeentrenado *LResNet100E-IR* para obtener embeddings de un dataset de rostros faciales personalizado, y usando estos embeddings se entrena un modelo clasificador **SVM** que realiza **verificaciones 1:N** respecto al número de personas en el dataset.
 
 Tecnologías usadas:
 
@@ -13,30 +13,41 @@ Tecnologías usadas:
 * **Scikit-learn**: Proporciona el modelo de machine-learning clásico **Suport Vector Machine** (*SVM*) y codificación de etiquetas.
 
 
-## Instalación
+## Requerimientos
 
-Requiere Python 3.8+ y las siguientes bibliotecas indicadas en el archivo `requirementes.txt`:
+Se trabaja con Python 3.12+ y las librerias del bloque "dependencies" en el archivo `pyproject.toml`:
+
 ```
-numpy
-opencv-python
-scikit-learn
-insightface
-onnxruntime
+...
+dependencies = [
+    "numpy>=2,<2.3.0",
+    "opencv-python==4.12.0.88",
+    "insightface>=2.0,<3",
+    "onnxruntime>=1.19",
+    "scikit-learn>=1.4",
+    "scikit-image>=0.22",
+    "joblib",
+]
+...
+
 ```
 
 ## Configuración
 
+El proyecto utiliza UV como gestor de paquetes; una vez clonado el proyecto localmente (paso 1), UV permite crear entornos virtuales e instalar dependencias de forma rápida y unificada mediante un único comando (paso 2).
+
 1. Descarga o clona el proyecto en una terminal:
 
 ```bash
-git clone https://github.com/GredUlloa/FineTuning-ArcFace-con-SVM
+git clone https://github.com/GredUlloa/Facial-feature-extraction.git
 cd # copia la ruta del proyecto
 ``` 
 
-2. Crea un entorno con la version 3.8 de python:
+2. Crea un entorno virtual `.venv` (python 3.8+) e instala las dependencias con UV, definidos en el archivo `pyproject.toml`:
 
 ```bash
-py -3.8 -m venv venv
+uv sync
+
 ```
 
 3. Activa el entorno creado:
@@ -48,36 +59,31 @@ source venv/bin/activate
 # .\venv\Scripts\activate
 ```
 
-4. Instala las dependencias del proyecto:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Modo de uso
+## Funcionamiento
 
 ### 1. Creacion de los datasets
 
-Considerando `src/` la ruta relativa del proyecto, dentro de `./Datasets` se encuentra por defecto los siguientes archivos que corresponden a fotos de una misma persona:
+Considerando `src/facerec/` la ruta relativa del proyecto, dentro de `./Datasets` se encuentra por defecto los siguientes archivos que corresponden a imágenes de una misma persona:
 
 * `/AndresC` (7 fotos)
 * `AndresC.jpg` (respectiva foto de prueba)
 
-Para que el modelo SVM realice una verificación es necesario disponer de al menos 2 datasets diferentes con el nombre de la otra persona y además una foto nueva que sirva como test de predicción:
+Para que el modelo SVM realice una verificación es necesario disponer de al menos 2 clases (personas) y además una foto nueva que sirva como test de predicción para cada clase:
 
-* `/persona2`
-* `FT2.jpg`
+* `/persona2` (Dataset personalizado)
+* `FT2.jpg` (respectiva foto de prueba)
 
-Ya que el modelo SVM está diseñado para clases binarias, se adapta al problema mediante 
-### 2. Ejecutar
+Esto permite al modelo identificar **1:N** entre las diferentes personas registradas en `./Datasets`.
 
-En la terminal se ejecuta el código `verif.py`:
+### 2. Ejecutar comparaciones 1:N
+
+Dentro del archivo `verif.py` se define la ruta de la imagen de prueba en ```img_path``` (por defecto `AndresC.jpg`); y se procede a ejecutar el archivo con UV:
 
 ```bash
 uv run verif.py
 ```
 
-Finalmente se devuelven y guardan los siguientes archivos en el directorio de trabajo:
+Finalmente, se devuelven y en el directorio del proyecto se guardan los siguientes archivos:
 
 * `svm_insightface.pkl`: Pesos del modelo SVM una vez entrenado
 * `label_encoder.pkl`: Etiquetas para el rostro de cada persona en los datasets
