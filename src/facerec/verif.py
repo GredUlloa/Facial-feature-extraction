@@ -80,4 +80,5 @@ def predict_image(img_path):
 ## Test de predicción
 img_test = os.path.join(WORK_DIR, "Datasets/AndresC.jpg")
 nombre, confianza = predict_image(img_test)
-print(f"Predicción: {nombre} (confianza: {confianza:.2f})")
+print(" ________________ RESULTADOS DEL TEST: ________________")
+print(f"Predicción: {nombre} || confianza: {confianza:.2f}")

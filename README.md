@@ -2,7 +2,7 @@
 
 **Extracción de Características** consiste en transformar datos brutos en representaciones más compactas y relevantes que pueden ser utilizadas por algoritmos de inteligencia artificial para aprender, clasificar o reconocer patrones. 
 
-En este proyecto se utiliza la función de pérdida **ArcFace** mediante el modelo preeentrenado *LResNet100E-IR* para obtener embeddings de un dataset de rostros faciales personalizado, y usando estos embeddings se entrena un modelo clasificador **SVM** que realiza **verificaciones 1:N** respecto al número de personas en el dataset.
+En este proyecto se utiliza la función de pérdida **ArcFace** mediante el modelo preeentrenado *Buffalo_1* para obtener embeddings de un dataset de rostros faciales personalizado, y usando estos embeddings se entrena un modelo clasificador **SVM** que realiza **verificaciones 1:N** respecto al número de personas en el dataset.
 
 Tecnologías usadas:
 
@@ -10,13 +10,12 @@ Tecnologías usadas:
 * **onnxruntime**: Motor de inferencia rápido y eficiente, usado por Insightface para ejecutar modelos de deep learning usando únicamente la CPU. La aceleración por GPU necesita la instalación adicional del paquete `onnxruntime-gpu`.
 * **Opencv**: Usado para la inicialización y preprocesamiento de las imágenes del dataset.
 * **Numpy**: Permite realizar operaciones matemáticas sobre arreglos vectoriales o matriciales, en este proyecto se aplica con las matrices de embeddings y etiquetados(*labels*) para realizar el entrenamiento del modelo SVM. 
-* **Scikit-learn**: Proporciona el modelo de machine-learning clásico **Suport Vector Machine** (*SVM*) y codificación de etiquetas.
+* **Scikit-learn**: Proporciona el modelo de machine-learning clásico **Suport Vector Machine** (*SVM*) para la clasificación mediante embeddings y codificación de etiquetas.
 
 
 ## Requerimientos
 
 Se trabaja con Python 3.12+ y las librerias del bloque "dependencies" en el archivo `pyproject.toml`:
-
 ```
 ...
 dependencies = [
@@ -29,7 +28,6 @@ dependencies = [
     "joblib",
 ]
 ...
-
 ```
 
 ## Configuración
@@ -43,7 +41,7 @@ git clone https://github.com/GredUlloa/Facial-feature-extraction.git
 cd # copia la ruta del proyecto
 ``` 
 
-2. Crea un entorno virtual `.venv` (python 3.8+) e instala las dependencias con UV, definidos en el archivo `pyproject.toml`:
+2. Crea un entorno virtual `.venv` e instala las dependencias con UV, definidos en el archivo `pyproject.toml`:
 
 ```bash
 uv sync
@@ -80,7 +78,7 @@ Esto permite al modelo identificar **1:N** entre las diferentes personas registr
 Dentro del archivo `verif.py` se define la ruta de la imagen de prueba en ```img_path``` (por defecto `AndresC.jpg`); y se procede a ejecutar el archivo con UV:
 
 ```bash
-uv run verif.py
+uv run .\src\facerec\verif.py
 ```
 
 Finalmente, se devuelven y en el directorio del proyecto se guardan los siguientes archivos:
